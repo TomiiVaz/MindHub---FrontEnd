@@ -19,25 +19,20 @@ header>h1 {
 
 /* ------------------------ Trabado ---------------------- */
 main>div {
-    display: block;
     text-align: center;
     background-color: black;
     color: white;
     padding: 1rem;
 }
 
-h2{
-    display: inline-block;
-    text-align: center;
-}
-
 figure{
-    display: inline-block;
-
+    text-align: end;
+    margin-right: 6rem;
 }
 
 figure>img{
-    width: 5rem;;
+    width: 5rem;
+    background-color: black;    
 }
 /* ------------------------ Trabado ---------------------- */
 
