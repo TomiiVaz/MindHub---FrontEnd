@@ -53,9 +53,10 @@ section article{
 }
 
 .segundo{
-    height: 6rem;
+    height: 9rem;
+    width: 75%;
 }
 
 article div{
-    height: 4rem;
+    height: 6rem;
 }
