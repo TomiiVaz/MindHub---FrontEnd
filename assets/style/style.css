@@ -17,7 +17,6 @@ header>h1 {
     font-size: 4rem;
 }
 
-/* ------------------------ Trabado ---------------------- */
 main>div {
     text-align: center;
     background-color: black;
@@ -25,33 +24,43 @@ main>div {
     padding: 1rem;
 }
 
-figure{
+figure {
     position: relative;
     text-align: end;
     margin-right: 15rem;
     bottom: -11rem;
 }
 
-figure>img{
+figure>img {
     width: 8rem;
-    background-color: black;    
+    background-color: black;
 }
-/* ------------------------ Trabado ---------------------- */
 
 section {
-    margin: 4rem;
+    display: flex;
 }
 
-section article{
-    display: inline-block;
-    vertical-align: center;
-    margin: 3rem;
+.nav {
+    background-color: black;
+    padding-left: 2rem;
+    /* flex-grow: 2; */
+    width: 20%;
+    height: 100vh;
 }
 
-.segundo{
-    width: 75%;
+.nav>a {
+    display: block;
+    margin: 3rem 0rem;
+    text-decoration: none;
+    color: white;
 }
 
-article div{
-    height: 6rem;
+.content {
+    width: 80%;
+    padding: 5rem;
+    /* flex-grow: 8; */
+}
+
+.content>div{
+    margin: 1rem;
 }
