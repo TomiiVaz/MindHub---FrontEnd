@@ -108,3 +108,10 @@ span {
     justify-content: space-between;
 }
 
+.divrules {
+    text-align: center;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
