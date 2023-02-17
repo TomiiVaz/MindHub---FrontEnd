@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
     margin: 0;
     padding: 0;
 }
@@ -122,4 +123,48 @@ dt {
 
 dd {
     text-indent: 1rem
+}
+
+form {}
+
+fieldset {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    border: 0;
+    margin-bottom: 2rem;
+}
+
+input {
+    margin: 2rem 0 0 0;
+}
+
+input {
+    background-color: transparent;
+    border: 0px solid;
+    border-bottom: 1px solid black;
+}
+
+input:focus {
+    outline: none;
+}
+
+.column {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.column>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.column>div {
+    margin-right: 6rem;
+}
+
+.ver {
+    text-align: center;
+    padding: 5rem 0;
 }
