@@ -76,6 +76,10 @@ table {
     border-collapse: collapse;
 }
 
+.circle {
+    list-style-type: circle;
+}
+
 td {
     text-align: center;
 }
