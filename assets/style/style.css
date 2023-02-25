@@ -9,16 +9,26 @@ a {
     text-decoration: none;
 }
 
-.w-35 {
-    width: 35%;
+.w-12r {
+    width: 12rem;
 }
 
-.bg-logo{
+.bg-logo {
     background-color: #D90368;
 }
 
-.cl-logo{
+.cl-logo {
     color: #D90368;
+}
+
+.ch-logo:checked{
+    accent-color: #D90368;
+}
+
+.in-color:focus {
+    border: #D90368;
+    border-color: #D90368;
+    box-shadow: 0 1px 1px #D90368 inset, 0 0 8px #D90368;
 }
 
 .sc {
