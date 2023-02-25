@@ -17,6 +17,18 @@ a {
     background-color: #D90368;
 }
 
+.cl-logo{
+    color: #D90368;
+}
+
+.sc {
+    transition: all 0.3s;
+}
+
+.sc:hover {
+    transform: scale(1.5);
+}
+
 .li-none {
     list-style: none;
 }
