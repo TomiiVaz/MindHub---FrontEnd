@@ -25,8 +25,17 @@ a {
     accent-color: #D90368;
 }
 
+.in-color {
+    border: 2px solid black;
+}
+
 .in-color:focus {
     border: #D90368;
+    border-color: #D90368;
+    box-shadow: 0 1px 1px #D90368 inset, 0 0 8px #D90368;
+}
+
+.br-color {
     border-color: #D90368;
     box-shadow: 0 1px 1px #D90368 inset, 0 0 8px #D90368;
 }
