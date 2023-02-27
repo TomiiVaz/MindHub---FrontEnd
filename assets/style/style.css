@@ -35,6 +35,11 @@ a {
     box-shadow: 0 1px 1px #D90368 inset, 0 0 8px #D90368;
 }
 
+.br-color {
+    border-color: #D90368;
+    box-shadow: 0 1px 1px #D90368 inset, 0 0 8px #D90368;
+}
+
 .sc {
     transition: all 0.3s;
 }
