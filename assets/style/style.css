@@ -51,3 +51,8 @@ a {
 .li-none {
     list-style: none;
 }
+
+.tarjeta {
+    width: 22rem;
+    height: 28rem;
+}
