@@ -1,5 +1,7 @@
+import { getCategories, data} from './data.js'
+getCategories()
+
 const content = document.getElementById('content')
-const currentDate = data.currentDate
 
 for (let event of data.events) {
     let card = document.createElement('div')

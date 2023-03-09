@@ -1,3 +1,6 @@
+import { getCategories, data } from "./data.js"
+getCategories()
+
 const content = document.getElementById('content')
 const currentDate = data.currentDate
 let upcomingEvents = []

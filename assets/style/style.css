@@ -54,5 +54,5 @@ a {
 
 .tarjeta {
     width: 22rem;
-    height: 28rem;
+    min-height: 28rem;
 }
