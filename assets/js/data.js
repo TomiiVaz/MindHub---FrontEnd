@@ -189,7 +189,7 @@ export function getCategories() {
     category.classList.add('m-md-3')
     category.classList.add('m-xxl-5')
     category.innerHTML = `
-  <input type="checkbox" name="${event}" value="Category" class="ch-logo"> ${event}
+  <input type="checkbox" name="Category" value="${event}" class="ch-logo"> ${event}
   `
     categories.appendChild(category)
   }
