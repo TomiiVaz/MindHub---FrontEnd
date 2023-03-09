@@ -1,4 +1,4 @@
-const data = {
+export const data = {
   "currentDate": "2022-01-01",
   "events": [
     {
@@ -171,3 +171,26 @@ const data = {
     }
   ]
 };
+
+export function getCategories() {
+  const categories = document.getElementById('categories')
+  let uniqueEvents = []
+
+  data.events.forEach(event => {
+    if (!uniqueEvents.includes(event.category)) {
+      uniqueEvents.push(event.category)
+    }
+  });
+
+  for (let event of uniqueEvents) {
+    let category = document.createElement('label')
+    console.log(event)
+    category.classList.add('m-2')
+    category.classList.add('m-md-3')
+    category.classList.add('m-xxl-5')
+    category.innerHTML = `
+  <input type="checkbox" name="${event}" value="Category" class="ch-logo"> ${event}
+  `
+    categories.appendChild(category)
+  }
+}
