@@ -172,7 +172,7 @@ export const data = {
   ]
 };
 
-export function getCategories() {
+export function getCategories(data) {
   const categories = document.getElementById('categories')
   let uniqueEvents = []
 
@@ -184,13 +184,12 @@ export function getCategories() {
 
   for (let event of uniqueEvents) {
     let category = document.createElement('label')
-    console.log(event)
     category.classList.add('m-2')
     category.classList.add('m-md-3')
     category.classList.add('m-xxl-5')
     category.innerHTML = `
-  <input type="checkbox" name="Category" value="${event}" class="ch-logo"> ${event}
-  `
+    <input type="checkbox" name="Category" value="${event}" class="ch-logo"> ${event}
+    `
     categories.appendChild(category)
   }
 }

@@ -1,5 +1,5 @@
 import { getCategories, data } from "./data.js"
-getCategories()
+getCategories(data)
 
 const content = document.getElementById('content')
 const currentDate = data.currentDate
