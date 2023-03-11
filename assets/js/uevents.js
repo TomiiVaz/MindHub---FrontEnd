@@ -1,6 +1,9 @@
-import { getCategories, data } from "./data.js"
+import { getCategories, getCards, data } from "./data.js"
 getCategories(data)
+getCards(data.events)
 
+const contCategories = document.getElementById('categories');
+let searchValue = document.getElementById('search')
 const content = document.getElementById('content')
 const currentDate = data.currentDate
 let upcomingEvents = []
@@ -11,21 +14,29 @@ for (let event of data.events) {
     }
 }
 
-for (let event of upcomingEvents) {
-    let card = document.createElement('div')
-    card.innerHTML = `
-    <div class="card tarjeta m-3">
-        <img src="${event.image}" class="card-img-top" alt="${event.category}">
-        <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">${event.name}</h5>
-            <p class="card-text">${event.description}</p>
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center m-2">
-                    <h6>Price: $${event.price}</h6>
-                    <div class="bg-logo mt-2 m-md-0 p-2 border border-2 border-dark">
-                        <a href="./event.html" class="card-link text-dark">See more</a>
-                    </div>
-            </div>
-        </div>
-    </div>`
-    content.appendChild(card)
+function getFilterCard() {
+    searchValue = document.getElementById('search').value
+    if (searchValue.length >= 4) {
+        let eventsFiltered = data.events.filter(event => event.category == searchValue || event.category == "Cinema")
+        getCards(eventsFiltered)
+    }
+    else {
+        getCards(data.events)
+    }
 }
+
+
+searchValue.addEventListener("keyup", function (evt) {
+    getFilterCard();
+    evt.preventDefault();
+})
+
+contCategories.addEventListener('change', (e) => {
+    let categoryFilter = e.target;
+    if(categoryFilter.checked){
+        let eventsFiltered = data.events.filter(event => event.category == categoryFilter.name)
+        getCards(eventsFiltered)
+    } else {
+        getCards(data.events)
+    }
+})
