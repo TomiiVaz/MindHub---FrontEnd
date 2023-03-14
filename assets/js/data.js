@@ -207,7 +207,7 @@ export function getCards(info) {
               <div class="d-flex flex-column flex-md-row justify-content-between align-items-center m-2">
                       <h6>Price: $${event.price}</h6>
                       <div class="bg-logo mt-2 m-md-0 p-2 border border-2 border-dark">
-                      <a href="./event.html" class="card-link text-dark">See more</a>
+                      <a href="./event.html?id=${event._id}" class="card-link text-dark">See more</a>
                       </div>
               </div>
               </div>
