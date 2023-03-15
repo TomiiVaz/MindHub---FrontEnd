@@ -196,6 +196,10 @@ export function getCategories(data) {
 
 export function getCards(info) {
   content.innerHTML = ''
+  if(info.length == 0){
+    content.innerHTML = '<h4 class="cl-logo"> No hay resultados! </h4>'
+    return
+  }
   for (let event of info) {
       let card = document.createElement('div');
       card.innerHTML = `
