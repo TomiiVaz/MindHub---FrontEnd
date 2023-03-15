@@ -28,21 +28,26 @@ function getFilterCardSearch(data, search) {
     return eventsFiltered
 }
 
-function getFilterCardCheckbox(data, evt) {
-    let categoryFilter = evt.target;
-    if (categoryFilter.checked) {
-        let eventsFiltered = data.events.filter(event => event.category == categoryFilter.name)
-        return eventsFiltered
+function getFilterCardCheckbox(data) {
+    let checkboxes = document.querySelectorAll("input[type='checkbox']")
+    let arraychecks = Array.from(checkboxes)
+    let checksChecked = arraychecks.filter(check => check.checked)
+    if(checksChecked.length == 0){
+        return data
     }
-    return ""
+    let checkValues = checksChecked.map(check => check.value)
+    let arrayFiltrado = data.filter(elemento => checkValues.includes(elemento.category))
+    return arrayFiltrado
+}
+
+function getGlobalFilter(){
+    let searchFilter = getFilterCardSearch(data, search)
+    let checkOfSearchFilter = getFilterCardCheckbox(searchFilter)
+    getCards(checkOfSearchFilter)
 }
 
 // Escucha cada tecla del search
-search.addEventListener("keyup", function () {
-    getCards(getFilterCardSearch(data, search))
-})
+search.addEventListener("input", getGlobalFilter)
 
 // Escucha cada cambio en los check filtra e imprime
-contCategories.addEventListener('change', (evt) => {
-    getCards(getFilterCardCheckbox(data, evt))
-})
+contCategories.addEventListener('change', getGlobalFilter)
