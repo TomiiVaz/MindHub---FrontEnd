@@ -1,4 +1,4 @@
-import { getCategories, getCards, data } from './data.js';
+import { getCategories, getCards, dataApi } from './data.js';
 
 // Es el contenedor de los check
 let contCategories = document.getElementById('categories');
@@ -8,10 +8,10 @@ let search = document.getElementById('search')
 const content = document.getElementById('content')
 
 // Imprime todas las categorias en check
-getCategories(data)
+getCategories(dataApi)
 
 // Imprime todas las tarjetas
-getCards(data.events)
+getCards(dataApi.events)
 
 // Filtra por el input search y retorna filtrado
 function getFilterCardSearch(data, search) {
@@ -33,7 +33,7 @@ function getFilterCardCheckbox(data) {
 }
 
 function getGlobalFilter(){
-    let searchFilter = getFilterCardSearch(data, search)
+    let searchFilter = getFilterCardSearch(dataApi, search)
     let checkOfSearchFilter = getFilterCardCheckbox(searchFilter)
     getCards(checkOfSearchFilter)
 }
