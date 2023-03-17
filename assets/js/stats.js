@@ -1,8 +1,8 @@
 import { dataApi } from "./data.js";
 
 const contentFirstRow = document.getElementById("firstTable");
+const contentSecondRow = document.getElementById("secondTable");
 let uniqueEvents = getUniqueEvents(dataApi);
-
 
 function getUniqueEvents(info) {
   let uniqueEvents = [];
@@ -17,14 +17,12 @@ function getUniqueEvents(info) {
 // Logica primer tabla
 function setFirstTableRow(info) {
   contentFirstRow.innerHTML = "";
-  info.forEach((element ,index) => {
+  info.forEach((element, index) => {
     let row = document.createElement("td");
-    if (index + 1 == info.length){
-        row.innerHTML = 
-        `<td>${element.event} - ${element.capacity}</td>`;
+    if (index + 1 == info.length) {
+      row.innerHTML = `<td>${element.event} - ${element.capacity}</td>`;
     } else {
-        row.innerHTML = 
-        `<td>${element.event} - ${element.percentage}%</td>`;
+      row.innerHTML = `<td>${element.event} - ${element.percentage}%</td>`;
     }
     contentFirstRow.appendChild(row);
   });
@@ -42,14 +40,6 @@ function getDataFirstTable(info) {
     if (element.date < info.currentDate) {
       let assistance = element.assistance;
       count = (assistance * 100) / capacity;
-      porcentajes.push({
-        event: element.name,
-        percentage: count,
-        capacity: element.capacity,
-      });
-    } else {
-      let estimate = element.estimate;
-      count = (estimate * 100) / capacity;
       porcentajes.push({
         event: element.name,
         percentage: count,
@@ -80,12 +70,30 @@ function getDataFirstTable(info) {
     }
     return 1;
   });
-  
-  results.push(porcentajes[0])
-  return results
+
+  results.push(porcentajes[0]);
+  return results;
 }
 
-let infoForFirstData = getDataFirstTable(dataApi)
-setFirstTableRow(infoForFirstData)
+let infoForFirstData = getDataFirstTable(dataApi);
+setFirstTableRow(infoForFirstData);
 // Logica Segunda tabla
 
+function setSecondTableRow(info) {
+  contentSecondRow.innerHTML = "";
+  info.forEach((element, index) => {
+    let row = document.createElement("tr");
+    row.innerHTML = `<td>${element}</td>`;
+    contentSecondRow.appendChild(row);
+  });
+}
+
+function getDataSecondTable(info) {
+  info.events.forEach((element) => {
+    if (element.date < info.currentDate) {
+      console.log(element)
+    }
+  });
+}
+
+let infoForSecondData = getDataSecondTable(dataApi);

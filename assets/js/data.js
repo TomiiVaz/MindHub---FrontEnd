@@ -190,7 +190,9 @@ const getDataApi = async () => {
     return jsonRespone;
   } catch (error) {
     console.log("Request for api -> " + error);
-    return data;
+    let jsonStatic = $.getJSON("dataApi.json")
+    let jsonStatickToJson = jsonStatic.json()
+    return jsonStatickToJson;
   }
 };
 
