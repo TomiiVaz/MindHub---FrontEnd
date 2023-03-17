@@ -183,16 +183,18 @@ const data = {
 
 const getDataApi = async () => {
   try {
-    const response = await fetch('https://mindhub-xj03.onrender.com/api/amazing')
-    const jsonRespone = await response.json()
-    return jsonRespone
+    const response = await fetch(
+      "https://mindhub-xj03.onrender.com/api/amazing"
+    );
+    const jsonRespone = await response.json();
+    return jsonRespone;
   } catch (error) {
-    console.log("Request for api -> " + error)
-    return data
+    console.log("Request for api -> " + error);
+    return data;
   }
 };
 
-export const dataApi = await getDataApi()
+export const dataApi = await getDataApi();
 
 export function getCategories(info) {
   const categories = document.getElementById("categories");
