@@ -1,6 +1,6 @@
-import { getCategories, getCards, data } from "./data.js"
+import { getCategories, getCards, dataApi } from "./data.js"
 // Imprime todas las categorias en check
-getCategories(data)
+getCategories(dataApi)
 
 // Es el contenedor de los check
 const contCategories = document.getElementById('categories');
@@ -8,10 +8,10 @@ const contCategories = document.getElementById('categories');
 let searchValue = document.getElementById('search')
 // Es el contenedor de cada tarjeta
 const content = document.getElementById('content')
-const currentDate = data.currentDate
+const currentDate = dataApi.currentDate
 let pastEvents = []
 
-for (let event of data.events) {
+for (let event of dataApi.events) {
     if (event.date < currentDate) {
         pastEvents.push(event)
         continue
@@ -41,7 +41,7 @@ function getFilterCardCheckbox(data) {
 }
 
 function getGlobalFilter(){
-    let searchFilter = getFilterCardSearch(data, search)
+    let searchFilter = getFilterCardSearch(dataApi, search)
     let checkOfSearchFilter = getFilterCardCheckbox(searchFilter)
     getCards(checkOfSearchFilter)
 }
