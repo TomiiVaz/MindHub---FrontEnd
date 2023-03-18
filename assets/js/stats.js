@@ -5,12 +5,22 @@ const contentSecondRow = document.getElementById("secondTable");
 const contentThreeRow = document.getElementById("threeTable");
 let uniqueEvents = getUniqueEvents(dataApi);
 
-function getUniqueEvents(info) {
+function getUniqueEvents(info, past) {
   let uniqueEvents = [];
 
   info.events.forEach((event) => {
-    if (!uniqueEvents.includes(event.category)) {
-      uniqueEvents.push(event.category);
+    if (past) {
+      if (info.currentDate > event.date) {
+        if (!uniqueEvents.includes(event.category)) {
+          uniqueEvents.push(event.category);
+        }
+      }
+    } else {
+      if (info.currentDate < event.date) {
+        if (!uniqueEvents.includes(event.category)) {
+          uniqueEvents.push(event.category);
+        }
+      }
     }
   });
   return uniqueEvents;
@@ -109,7 +119,7 @@ function updateEventSecond(element, result) {
 function getDataSecondTable(info) {
   let result = [];
   let reduceEvents = [];
-  let uniqueEvents = getUniqueEvents(info);
+  let uniqueEvents = getUniqueEvents(info, false);
 
   for (let i in uniqueEvents) {
     reduceEvents.push({
@@ -135,7 +145,7 @@ function getDataSecondTable(info) {
       percentage: percentageCount,
     });
   }
-  
+
   return result;
 }
 
@@ -171,7 +181,7 @@ function updateEventThree(element, result) {
 function getDataThreeTable(info) {
   let result = [];
   let reduceEvents = [];
-  let uniqueEvents = getUniqueEvents(info);
+  let uniqueEvents = getUniqueEvents(info, true);
 
   for (let i in uniqueEvents) {
     reduceEvents.push({
