@@ -106,21 +106,35 @@ function setSecondTableRow(info) {
 
 function getDataSecondTable(info) {
   let result = [];
+  let categories = getUniqueEvents(info, false);
+
+  categories.forEach((categorie) => {
+    result.push({
+      category: categorie,
+      revenues: 0,
+      percentage: 0,
+      cantCategory: 0,
+    });
+  });
 
   info.events.forEach((element) => {
     if (element.date > info.currentDate) {
       // reduceEvents = updateEventSecond(element, reduceEvents);
       let revenuesCount = element.price * element.estimate;
       let percentageCount = (element.estimate * 100) / element.capacity;
-      result.push({
-        category: element.category,
-        capacity: element.capacity,
-        estimate: element.estimate,
-        price: element.price,
-        revenues: revenuesCount,
-        percentage: percentageCount,
+      result.forEach((item) => {
+        if (element.category == item.category) {
+          item.revenues += revenuesCount;
+          item.percentage += percentageCount;
+          item.cantCategory += 1;
+        }
       });
     }
+  });
+
+  result.forEach((item) => {
+    console.log(item);
+    item.percentage = (item.percentage / item.cantCategory).toFixed(2);
   });
 
   return result;
@@ -146,38 +160,34 @@ function setThreeTableRow(info) {
 function getDataThreeTable(info) {
   let result = [];
   let categories = getUniqueEvents(info, true);
-  console.log(categories);
 
   categories.forEach((categorie) => {
     result.push({
-      // Instanciar todo en cero
+      category: categorie,
+      revenues: 0,
+      percentage: 0,
+      cantCategory: 0,
     });
-    // categorie.reduce((acc, act) => {
-    //   acc.categorie = categorie.categorie
-    //   acc.revenue += categorie.price * categorie.assistance
-    // }, {
-    //   category: "",
-    //   revenue: 0,
-    //   percetage: 0
-    // })
   });
-
-  // agarrar las categorias, generar un array de las categorias con todo vacio e ir rellenando con informacion en cada vuelta del foreach de abajo
 
   info.events.forEach((element) => {
     if (element.date < info.currentDate) {
       let revenuesCount = element.price * element.assistance;
       let percentageCount = (element.assistance * 100) / element.capacity;
-      // Hacer un foreach de result y ver si coincide con la categoria y rellenar de informacion
-      result.push({
-        category: element.category,
-        revenues: revenuesCount,
-        capacity: element.capacity,
-        assistance: element.assistance,
-        price: element.price,
-        percentage: percentageCount,
+
+      result.forEach((item) => {
+        if (element.category == item.category) {
+          item.revenues += revenuesCount;
+          item.percentage += percentageCount;
+          item.cantCategory += 1;
+        }
       });
     }
+  });
+
+  result.forEach((item) => {
+    console.log(item);
+    item.percentage = (item.percentage / item.cantCategory).toFixed(2);
   });
 
   return result;
