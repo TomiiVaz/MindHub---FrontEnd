@@ -1,9 +1,9 @@
-import { data } from './data.js';
+import { dataApi } from './data.js';
 
 const queryString = location.search
 const params = new URLSearchParams(queryString)
 const id = params.get("id")
-const eventFind = data.events.find(event => event._id == id)
+const eventFind = dataApi.events.find(event => event._id == id)
 const contEvent = document.getElementById('mainEvent')
 let event = document.createElement('div')
 

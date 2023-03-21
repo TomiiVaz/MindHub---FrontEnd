@@ -1,3 +1,5 @@
+import dataJson from "./dataApi.json" assert { type: "json" };
+
 const data = {
   currentDate: "2022-01-01",
   events: [
@@ -190,9 +192,9 @@ const getDataApi = async () => {
     return jsonRespone;
   } catch (error) {
     console.log("Request for api -> " + error);
-    let jsonStatic = $.getJSON("dataApi.json")
-    let jsonStatickToJson = jsonStatic.json()
-    return jsonStatickToJson;
+    // let jsonStatic = $.getJSON("dataApi.json")
+    // let jsonStatickToJson = jsonStatic.json()
+    return dataJson;
   }
 };
 

@@ -104,47 +104,24 @@ function setSecondTableRow(info) {
   });
 }
 
-function updateEventSecond(element, result) {
-  let updateResult = result;
-  for (let i of result) {
-    if (element.category == i.category) {
-      i.capacity += element.capacity;
-      i.estimate += element.estimate;
-      i.price = element.price;
-    }
-  }
-  return updateResult;
-}
-
 function getDataSecondTable(info) {
   let result = [];
-  let reduceEvents = [];
-  let uniqueEvents = getUniqueEvents(info, false);
-
-  for (let i in uniqueEvents) {
-    reduceEvents.push({
-      category: uniqueEvents[i],
-      capacity: 0,
-      estimate: 0,
-      price: 0,
-    });
-  }
 
   info.events.forEach((element) => {
     if (element.date > info.currentDate) {
-      reduceEvents = updateEventSecond(element, reduceEvents);
+      // reduceEvents = updateEventSecond(element, reduceEvents);
+      let revenuesCount = element.price * element.estimate;
+      let percentageCount = (element.estimate * 100) / element.capacity;
+      result.push({
+        category: element.category,
+        capacity: element.capacity,
+        estimate: element.estimate,
+        price: element.price,
+        revenues: revenuesCount,
+        percentage: percentageCount,
+      });
     }
   });
-
-  for (let event of reduceEvents) {
-    let revenuesCount = event.price * event.estimate;
-    let percentageCount = (event.estimate * 100) / event.capacity;
-    result.push({
-      category: event.category,
-      revenues: revenuesCount,
-      percentage: percentageCount,
-    });
-  }
 
   return result;
 }
@@ -166,47 +143,43 @@ function setThreeTableRow(info) {
   });
 }
 
-function updateEventThree(element, result) {
-  let updateResult = result;
-  for (let i of result) {
-    if (element.category == i.category) {
-      i.capacity += element.capacity;
-      i.assistance += element.assistance;
-      i.price = element.price;
-    }
-  }
-  return updateResult;
-}
-
 function getDataThreeTable(info) {
   let result = [];
-  let reduceEvents = [];
-  let uniqueEvents = getUniqueEvents(info, true);
+  let categories = getUniqueEvents(info, true);
+  console.log(categories);
 
-  for (let i in uniqueEvents) {
-    reduceEvents.push({
-      category: uniqueEvents[i],
-      capacity: 0,
-      assistance: 0,
-      price: 0,
+  categories.forEach((categorie) => {
+    result.push({
+      // Instanciar todo en cero
     });
-  }
+    // categorie.reduce((acc, act) => {
+    //   acc.categorie = categorie.categorie
+    //   acc.revenue += categorie.price * categorie.assistance
+    // }, {
+    //   category: "",
+    //   revenue: 0,
+    //   percetage: 0
+    // })
+  });
+
+  // agarrar las categorias, generar un array de las categorias con todo vacio e ir rellenando con informacion en cada vuelta del foreach de abajo
 
   info.events.forEach((element) => {
     if (element.date < info.currentDate) {
-      reduceEvents = updateEventThree(element, reduceEvents);
+      let revenuesCount = element.price * element.assistance;
+      let percentageCount = (element.assistance * 100) / element.capacity;
+      // Hacer un foreach de result y ver si coincide con la categoria y rellenar de informacion
+      result.push({
+        category: element.category,
+        revenues: revenuesCount,
+        capacity: element.capacity,
+        assistance: element.assistance,
+        price: element.price,
+        percentage: percentageCount,
+      });
     }
   });
 
-  for (let event of reduceEvents) {
-    let revenuesCount = event.price * event.assistance;
-    let percentageCount = (event.assistance * 100) / event.capacity;
-    result.push({
-      category: event.category,
-      revenues: revenuesCount,
-      percentage: percentageCount,
-    });
-  }
   return result;
 }
 
