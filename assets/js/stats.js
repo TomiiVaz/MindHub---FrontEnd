@@ -145,12 +145,30 @@ function setThreeTableRow(info) {
 
 function getDataThreeTable(info) {
   let result = [];
+  let categories = getUniqueEvents(info, true);
+  console.log(categories);
+
+  categories.forEach((categorie) => {
+    result.push({
+      // Instanciar todo en cero
+    });
+    // categorie.reduce((acc, act) => {
+    //   acc.categorie = categorie.categorie
+    //   acc.revenue += categorie.price * categorie.assistance
+    // }, {
+    //   category: "",
+    //   revenue: 0,
+    //   percetage: 0
+    // })
+  });
+
+  // agarrar las categorias, generar un array de las categorias con todo vacio e ir rellenando con informacion en cada vuelta del foreach de abajo
 
   info.events.forEach((element) => {
     if (element.date < info.currentDate) {
       let revenuesCount = element.price * element.assistance;
       let percentageCount = (element.assistance * 100) / element.capacity;
-
+      // Hacer un foreach de result y ver si coincide con la categoria y rellenar de informacion
       result.push({
         category: element.category,
         revenues: revenuesCount,
