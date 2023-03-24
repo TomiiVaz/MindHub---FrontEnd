@@ -19,8 +19,6 @@ event.classList.add('p-5')
 event.classList.add('br-color')
 
 
-
-console.log(eventFind)
 event.innerHTML = `
 <figure class="w-100 w-md-50 text-center">
     <img src="${eventFind.image}" alt="Imagen Evento" class="w-100">
@@ -37,4 +35,3 @@ event.innerHTML = `
 </div>`
 
 contEvent.appendChild(event)
-

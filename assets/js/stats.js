@@ -3,8 +3,7 @@ import { dataApi } from "./data.js";
 const contentFirstRow = document.getElementById("firstTable");
 const contentSecondRow = document.getElementById("secondTable");
 const contentThreeRow = document.getElementById("threeTable");
-let uniqueEvents = getUniqueEvents(dataApi);
-
+  
 function getUniqueEvents(info, past) {
   let uniqueEvents = [];
 
@@ -133,7 +132,6 @@ function getDataSecondTable(info) {
   });
 
   result.forEach((item) => {
-    console.log(item);
     item.percentage = (item.percentage / item.cantCategory).toFixed(2);
   });
 
@@ -186,7 +184,6 @@ function getDataThreeTable(info) {
   });
 
   result.forEach((item) => {
-    console.log(item);
     item.percentage = (item.percentage / item.cantCategory).toFixed(2);
   });
 
