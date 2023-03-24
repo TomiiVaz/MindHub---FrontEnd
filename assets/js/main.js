@@ -5,29 +5,32 @@ const { createApp } = Vue
 const app = createApp({
     data() {
         return {
-            categories: ''
+
         }
     },
     mounted() {
 
     },
     methods: {
-        getCategories(dataApi) {
+        getCategories() {
+            const categories = document.getElementById("categories");
             let uniqueEvents = [];
-            info.events.forEach((event) => {
+            dataApi.events.forEach((event) => {
                 if (!uniqueEvents.includes(event.category)) {
                     uniqueEvents.push(event.category);
                 }
             });
 
-            for (let event of uniqueEvents) {
-                this.category = document.createElement("label");
-                this.category.classList.add("m-2");
-                this.category.classList.add("m-md-3");
-                this.category.classList.add("m-xxl-5");
-                this.category.innerHTML = `
+            uniqueEvents.forEach((event) => {
+                let category = document.createElement("label");
+                category = document.createElement("label");
+                category.classList.add("m-2");
+                category.classList.add("m-md-3");
+                category.classList.add("m-xxl-5");
+                category.innerHTML = `
                     <input type="checkbox" name="${event}" value="${event}" class="ch-logo"> ${event}`;
-            }
+                categories.appendChild(category);
+            })
         }
     }
 
