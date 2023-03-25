@@ -5,7 +5,7 @@ const { createApp } = Vue
 const app = createApp({
     data() {
         return {
-
+            categories: ["pepe", "hola"]
         }
     },
     mounted() {
@@ -13,24 +13,11 @@ const app = createApp({
     },
     methods: {
         getCategories() {
-            const categories = document.getElementById("categories");
-            let uniqueEvents = [];
             dataApi.events.forEach((event) => {
-                if (!uniqueEvents.includes(event.category)) {
-                    uniqueEvents.push(event.category);
+                if (!this.categories.includes(event.category)) {
+                    this.categories.push(event.category);
                 }
             });
-
-            uniqueEvents.forEach((event) => {
-                let category = document.createElement("label");
-                category = document.createElement("label");
-                category.classList.add("m-2");
-                category.classList.add("m-md-3");
-                category.classList.add("m-xxl-5");
-                category.innerHTML = `
-                    <input type="checkbox" name="${event}" value="${event}" class="ch-logo"> ${event}`;
-                categories.appendChild(category);
-            })
         }
     }
 
