@@ -2,14 +2,14 @@ import { dataApi } from './data.js';
 
 const { createApp } = Vue
 
-const app = createApp({
+const appCat = createApp({
     data() {
         return {
-            categories: []
+            cards: []
         }
     },
     mounted() {
-        this.getCategories()
+        this.getCards()
     },
     methods: {
         getCategories() {
@@ -22,6 +22,31 @@ const app = createApp({
     }
 
 }).mount('#categories')
+
+const appCard = createApp({
+    data() {
+        return {
+            cards: []
+        }
+    },
+    mounted() {
+        this.getCards()
+    },
+    methods: {
+        getCards() {
+            dataApi.events.forEach((event) => {
+                this.cards.push({
+                    id: event._id,
+                    name: event.name,
+                    description: event.description,
+                    image: event.image,
+                    price: event.price,
+                })
+            })
+        }
+    }
+
+}).mount('#content')
 
 
 
