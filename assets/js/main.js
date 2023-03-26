@@ -5,11 +5,14 @@ const { createApp } = Vue
 const appCat = createApp({
     data() {
         return {
-            cards: []
+            categories: []
         }
     },
     mounted() {
-        this.getCards()
+        this.getCategories()
+        addEventListener('change', () => {
+            console.log("ADIOS")
+        })
     },
     methods: {
         getCategories() {
@@ -30,10 +33,10 @@ const appCard = createApp({
         }
     },
     mounted() {
-        this.getCards()
+        this.getCards(dataApi)
     },
     methods: {
-        getCards() {
+        getCards(info) {
             dataApi.events.forEach((event) => {
                 this.cards.push({
                     id: event._id,
@@ -43,47 +46,52 @@ const appCard = createApp({
                     price: event.price,
                 })
             })
-        }
+        },
     }
 
 }).mount('#content')
 
+const appFilter = createApp({
+    data() {
+        return {
+            cards: []
+        }
+    },
+    mounted() {
+        addEventListener('change', () => {
+            console.log("ADIOS")
+        })
+    },
+    methods: {
+        getCategories() {
+            dataApi.events.forEach((event) => {
+                if (!this.categories.includes(event.category)) {
+                    this.categories.push(event.category);
+                }
+            });
+        }
+    }
 
+}).mount('#filter')
 
-
-
-
-
-
-
-
-
-
-
-
-// // Es el contenedor de los check
-// let contCategories = document.getElementById('categories');
-// // Es el input
+// const contCategories = document.getElementById('categories');
 // let search = document.getElementById('search')
-// // Es el contenedor de cada tarjeta
-// const content = document.getElementById('content')
 
-// // Imprime todas las categorias en check
-// getCategories(dataApi)
 
-// // Imprime todas las tarjetas
-// getCards(dataApi.events)
+// function getGlobalFilter() {
+//     let searchFilter = getFilterCardSearch(dataApi, search)
+//     let checkOfSearchFilter = getFilterCardCheckbox(searchFilter)
+//     getCards(checkOfSearchFilter)
+// }
 
-// // Filtra por el input search y retorna filtrado
 // function getFilterCardSearch(data, search) {
 //     let searchValue = search.value
 //     let eventsFiltered = data.events.filter(event => event.name.toLowerCase().startsWith(searchValue.toLowerCase()))
 //     return eventsFiltered
 // }
-
 // function getFilterCardCheckbox(data) {
 //     let checkboxes = document.querySelectorAll("input[type='checkbox']")
-//     let arraychecks = Array.from(checkboxes)
+//     let array    checks = Array.from(checkboxes)
 //     let checksChecked = arraychecks.filter(check => check.checked)
 //     if (checksChecked.length == 0) {
 //         return data
@@ -93,14 +101,5 @@ const appCard = createApp({
 //     return arrayFiltrado
 // }
 
-// function getGlobalFilter() {
-//     let searchFilter = getFilterCardSearch(dataApi, search)
-//     let checkOfSearchFilter = getFilterCardCheckbox(searchFilter)
-//     getCards(checkOfSearchFilter)
-// }
-
-// // Escucha cada tecla del search
-// search.addEventListener("input", getGlobalFilter)
-
-// // Escucha cada cambio en los check filtra e imprime
 // contCategories.addEventListener('change', getGlobalFilter)
+// search.addEventListener("input", getGlobalFilter)
