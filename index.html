@@ -46,8 +46,8 @@
   </nav>
   <main>
     <div class="d-flex flex-column flex-lg-row justify-content-around align-items-center m-4" id="filter">
-      <div class="text-center" v-for="category in categories" id="categories">
-        <label for="{{category}}" class="m-2 m-md-3 m-xxl-5">
+      <div class="text-center"  id="categories">
+        <label v-for="category in categories" for="{{category}}" class="m-2 m-md-3 m-xxl-5">
           <input type="checkbox" name="{{category}}" value="{{category}}" class="ch-logo"> {{category}}
         </label>
       </div>

@@ -1,15 +1,15 @@
-import { getCategories, getCards, dataApi } from './data.js';
+import { dataApi } from './data.js';
 
 const { createApp } = Vue
 
 const app = createApp({
     data() {
         return {
-            categories: ["pepe", "hola"]
+            categories: []
         }
     },
     mounted() {
-
+        this.getCategories()
     },
     methods: {
         getCategories() {
