@@ -6,65 +6,45 @@ const appCat = createApp({
     data() {
         return {
             cards: [],
+            cardsBackUp: [],
+            inputText: "",
             categories: [],
-            search: "",
+            categoriesSelected: [],
         }
     },
     created() {
-        this.getCategories()
-        this.getCards(dataApi.events)
+        this.getData()
     },
     mounted() {
-        this.search = document.getElementById('search')
+
     },
     methods: {
-        getCards(info) {
-            this.cards = []
-            info.forEach((event) => {
-                this.cards.push({
-                    id: event._id,
-                    name: event.name,
-                    description: event.description,
-                    image: event.image,
-                    price: event.price,
-                })
-            })
+        getData() {
+            this.cards = dataApi.events
+            this.cardsBackUp = dataApi.events
+            this.getCategories(dataApi)
         },
 
-        getCategories() {
-            dataApi.events.forEach((event) => {
-                if (!this.categories.includes(event.category)) {
+        getCategories(data) {
+            data.events.forEach(event => {
+                if (!this.categories.includes(event.category) && event.category) {
                     this.categories.push(event.category);
                 }
             });
         },
 
-        getGlobalFilter() {
-            let searchFilter = this.getFilterCardSearch(dataApi, this.search)
-            let checkOfSearchFilter = this.getFilterCardCheckbox(searchFilter)
-            this.getCards(checkOfSearchFilter)
-        },
 
-        getFilterCardCheckbox(data) {
-            let checkboxes = document.querySelectorAll("input[type='checkbox']")
-            let arraychecks = Array.from(checkboxes)
-            let checksChecked = arraychecks.filter(check => check.checked)
-            if (checksChecked.length == 0) {
-                return data
-            }
-            let checkValues = checksChecked.map(check => check.value)
-            let arrayFiltrado = data.filter(elemento => checkValues.includes(elemento.category))
-            return arrayFiltrado
-        },
-
-        getFilterCardSearch(data, search) {
-            let searchValue = search.value
-            let eventsFiltered = data.events.filter(event => event.name.toLowerCase().includes(searchValue.toLowerCase()))
-            return eventsFiltered
-        },
     },
     computed: {
-        // Pasar los filtros acá
+        filterCards() {
+            let firstFilter = this.cardsBackUp.filter(card => card.name.toLowerCase().includes(this.inputText.toLowerCase()))
+            if (!this.categoriesSelected.length) {
+                this.cards = firstFilter
+            } else {
+                this.cards = firstFilter.filter(card => this.categoriesSelected.includes(card.category))
+            }
+        }
+
     }
 
 }).mount('#app')
