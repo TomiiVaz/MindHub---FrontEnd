@@ -2,7 +2,7 @@ import { dataApi } from './data.js';
 
 const { createApp } = Vue
 
-const appCat = createApp({
+const app = createApp({
     data() {
         return {
             cards: [],
