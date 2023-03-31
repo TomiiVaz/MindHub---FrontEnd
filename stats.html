@@ -55,10 +55,11 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-                <td v-for="(stats, index) in statsFirstTable">
-                    <tr v-if="index + 1 == statsFirstTable.length">{{stats.event}} - {{stat.category}}</tr>
-                    <tr v-if="index + 1 != statsFirstTable.length">{{stat.event}} - {{stat.percentage}}%</tr>
-                </td>
+                <tr>
+                    <td v-for="(stats, index) in statsFirstTable">
+                        {{ stats.event }} - {{ stats.capacity }}
+                    </td>
+                </tr>
             </tbody>
         </table>
         <h4 class="text-center mb-2">Upcoming events statistics by category</h4>
@@ -70,8 +71,12 @@
                     <th>Percentage of attendance</th>
                 </tr>
             </thead>
-            <tbody class="text-center" id="secondTable">
-
+            <tbody class="text-center">
+                <tr v-for="(stats, index) in statsSecondTable">
+                    <td>{{ stats.category }}</td>
+                    <td>{{ stats.revenues }}</td>
+                    <td>{{ stats.percentage }}%</td>
+                </tr>
             </tbody>
         </table>
         <h4 class="text-center mb-2">Past Events statistic by category</h4>
@@ -83,8 +88,12 @@
                     <th>Percentage of attendance</th>
                 </tr>
             </thead>
-            <tbody class="text-center" id="threeTable">
-
+            <tbody class="text-center">
+                <tr v-for="(stats, index) in statsThreeTable">
+                    <td>{{ stats.category }}</td>
+                    <td>{{ stats.revenues }}</td>
+                    <td>{{ stats.percentage }}%</td>
+                </tr>
             </tbody>
         </table>
     </main>
