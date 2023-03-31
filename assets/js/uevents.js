@@ -1,52 +1,57 @@
-import { getCategories, getCards, dataApi } from "./data.js"
-// Imprime todas las categorias en check
-getCategories(dataApi)
+import { dataApi } from './data.js';
 
-// Es el contenedor de los check
-const contCategories = document.getElementById('categories');
-// Es el input
-let searchValue = document.getElementById('search')
-// Es el contenedor de cada tarjeta
-const content = document.getElementById('content')
-const currentDate = dataApi.currentDate
-let upcomingEvents = []
+const { createApp } = Vue
 
-for (let event of dataApi.events) {
-    if (event.date > currentDate) {
-        upcomingEvents.push(event)
+const app = createApp({
+    data() {
+        return {
+            cards: [],
+            cardsBackUp: [],
+            inputText: "",
+            categories: [],
+            categoriesSelected: [],
+        }
+    },
+    created() {
+        this.getData()
+    },
+    mounted() {
+
+    },
+    methods: {
+        getData() {
+            dataApi.events.forEach(event => {
+                if (event.date > dataApi.currentDate) {
+                    this.cards.push(event)
+                    this.cardsBackUp.push(event)
+                    this.getCategories(dataApi)
+                }
+            })
+
+        },
+
+        getCategories(data) {
+            data.events.forEach(event => {
+                if (event.date > data.currentDate) {
+                    if (!this.categories.includes(event.category) && event.category) {
+                        this.categories.push(event.category);
+                    }
+                }
+            });
+        },
+
+
+    },
+    computed: {
+        filterCards() {
+            let firstFilter = this.cardsBackUp.filter(card => card.name.toLowerCase().includes(this.inputText.toLowerCase()))
+            if (!this.categoriesSelected.length) {
+                this.cards = firstFilter
+            } else {
+                this.cards = firstFilter.filter(card => this.categoriesSelected.includes(card.category))
+            }
+        }
+
     }
-}
 
-// Imprime todas las tarjetas correspondientes
-getCards(upcomingEvents)
-
-// Filtra por el input search y retorna filtrado
-function getFilterCardSearch(data, search) {
-    let searchValue = search.value
-    let eventsFiltered = data.events.filter(event => event.name.toLowerCase().startsWith(searchValue.toLowerCase()))
-    return eventsFiltered
-}
-
-function getFilterCardCheckbox(data) {
-    let checkboxes = document.querySelectorAll("input[type='checkbox']")
-    let arraychecks = Array.from(checkboxes)
-    let checksChecked = arraychecks.filter(check => check.checked)
-    if(checksChecked.length == 0){
-        return data
-    }
-    let checkValues = checksChecked.map(check => check.value)
-    let arrayFiltrado = data.filter(elemento => checkValues.includes(elemento.category))
-    return arrayFiltrado
-}
-
-function getGlobalFilter(){
-    let searchFilter = getFilterCardSearch(dataApi, search)
-    let checkOfSearchFilter = getFilterCardCheckbox(searchFilter)
-    getCards(checkOfSearchFilter)
-}
-
-// Escucha cada tecla del search
-search.addEventListener("input", getGlobalFilter)
-
-// Escucha cada cambio en los check filtra e imprime
-contCategories.addEventListener('change', getGlobalFilter)
+}).mount('#app')
